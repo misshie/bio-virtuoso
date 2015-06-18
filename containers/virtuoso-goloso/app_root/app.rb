@@ -48,7 +48,7 @@ EXIT;
     pipe = IO.popen(ISQL, 'w+')
     pipe.puts sql
     pipe.close_write
-    puts "isql: #{pipe.gets}"
+    puts "isql: #{pipe.read}"
   rescue IOError, SystemCallError
     halt 500, "500 INTERNAL SERVER ERROR"
   ensure
