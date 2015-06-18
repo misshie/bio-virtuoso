@@ -1,13 +1,13 @@
-#!/usr/bin/env ruby
-#
+#!/usr/local ruby
 
 require 'sinatra'
 require 'haml'
 
-#ISQL = "/usr/local/bin/virtuoso"
-ISQL = "wc"
+VIRTUOSO = "/usr/local/virtuoso-opensource"
+ISQL     = "#{VIRTUOSO}/bin/virtuoso/isql"
+PUBLIC   = "#{VIRTUOSO}/var/lib/virsuoso/db"
 
-set :public_dir, File.dirname(__FILE__) + '/public'
+set :public_dir, PUBLIC
 
 ##########
 get '/' do
@@ -18,7 +18,7 @@ end
 post '/turtle' do
   halt 400, "400 BAD REQUEST" unless (params[:file] && params[:graph])
   begin
-    filepath = "./public/#{params[:file][:filename]}"
+    filepath = "#{PUBLIC}/#{params[:file][:filename]}"
     fout = File.open(filepath, 'wb')
     p filepath
     p params[:graph]
@@ -52,7 +52,7 @@ end
 post '/rdfxml' do
   halt 400, "400 BAD REQUEST" unless (params[:file] && params[:graph])
   begin
-    filepath = "./public/#{params[:file][:filename]}"
+    filepath = "#{PUBLIC}/#{params[:file][:filename]}"
     fout = File.open(filepath, 'wb')
     p filepath
     p params[:graph]

@@ -1,3 +1,0 @@
-@base	<http://misshie.jp/rdf/sample/> .
-@prefix	rdf:				<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-<TEST> rdf:type "TEST" .

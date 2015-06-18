@@ -17,7 +17,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-# Install packages.
+# Install APT packages.
 RUN apt-get update && \
     apt-get install -y automake gperf libtool flex bison libssl-dev \
     build-essential \
@@ -44,7 +44,9 @@ RUN \
     make install && \
     cd .. && \
     rm -r ruby-2.2.2 ruby-2.2.2.tar.gz && \
-    echo 'gem: --no-document' > /usr/local/etc/gemrc
+    echo 'gem: --no-document' > /usr/local/etc/gemrc && \
+    gem install sinatra && \
+    gem install thin
 
 # Install virtuoso
 ENV VIRTUOSO_VERSION develop/7
@@ -60,13 +62,15 @@ RUN \
   make install && \
   rm -fr /tmp/virtuoso-opensource
 
+
 # Expose ports.
-#   - 8890: HTTP
+#   - 8890: HTTP of Virtuoso
+#   - 4567: HTTP of Sinatra/Thin
 EXPOSE 8890
+EXPOSE 4567
 
 # Start Virtuoso to import downloaded and converted data
-ADD scripts /opt/Ontologies/scripts
-ADD samples /opt/Ontologies/samples
+ADD app_root /opt/app_root
 
-CMD ["/bin/bash", "-C", "/opt/Ontologies/scripts/import.sh"]
+CMD ["/usr/local/ruby", "/opt/app_root/app.rb"]
 
