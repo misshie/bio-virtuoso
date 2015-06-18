@@ -46,7 +46,8 @@ RUN \
     rm -r ruby-2.2.2 ruby-2.2.2.tar.gz && \
     echo 'gem: --no-document' > /usr/local/etc/gemrc && \
     gem install sinatra && \
-    gem install thin
+    gem install thin && \
+    gem install haml
 
 # Install virtuoso
 ENV VIRTUOSO_VERSION develop/7
