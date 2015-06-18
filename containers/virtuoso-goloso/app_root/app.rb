@@ -7,6 +7,7 @@ VIRTUOSO = "/usr/local/virtuoso-opensource"
 ISQL     = "#{VIRTUOSO}/bin/isql"
 PUBLIC   = "#{VIRTUOSO}/var/lib/virtuoso/db"
 
+set :environment, :production
 set :public_dir, PUBLIC
 
 puts "== invoke Virtuoso on port 8890"
