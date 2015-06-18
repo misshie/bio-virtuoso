@@ -1,0 +1,12 @@
+!!!html5
+%html
+  %body
+    A fast interface to upload RDF files to the local Virtuoso server
+
+    curl -X POST -F file=turtle.ttl graph=example.com/rdf1 http://localhost:4567/turtle
+
+    curl -X POST -F file=rdfxml.rdf graph=example.com/rdf2 http://localhost:4567/rdfxml
+
+    Copyright: (c) MISHIMA, Hiroyuki
+
+    License: the MIT license
