@@ -29,8 +29,8 @@ post '/turtle' do
   begin
     filepath = "#{PUBLIC}/#{params[:file][:filename]}"
     fout = File.open(filepath, 'wb')
-    p filepath
-    p params[:graph]
+    puts "post: #{filepath}"
+    puts "graph: #{params[:graph]}"
     fout.write params[:file][:tempfile].read
   rescue IOError, SystemCallError
     halt 500, "500 INTERNAL SERVER ERROR"
@@ -48,7 +48,7 @@ EXIT;
     pipe = IO.popen(ISQL, 'w+')
     pipe.puts sql
     pipe.close_write
-    p pipe.gets
+    puts "isql: #{pipe.gets}"
   rescue IOError, SystemCallError
     halt 500, "500 INTERNAL SERVER ERROR"
   ensure
@@ -63,8 +63,8 @@ post '/rdfxml' do
   begin
     filepath = "#{PUBLIC}/#{params[:file][:filename]}"
     fout = File.open(filepath, 'wb')
-    p filepath
-    p params[:graph]
+    puts "post: #{filepath}"
+    puts "graph: #{params[:graph]}"
     fout.write params[:file][:tempfile].read
   rescue IOError, SystemCallError
     halt 500, "500 INTERNAL SERVER ERROR"
@@ -81,7 +81,7 @@ EXIT;
     pipe = IO.popen(ISQL, 'w+')
     pipe.puts sql
     pipe.close_write
-    p pipe.gets
+    puts "isql: #{pipe.gets}"
   rescue IOError, SystemCallError
     halt 500, "500 INTERNAL SERVER ERROR #{$!}"
   ensure
