@@ -1,5 +1,5 @@
 #
-# dockerfile:virtuoso-golosi
+# dockerfile:virtuoso-goloso
 # the Virtuoso database engine 
 # with a web server importing data using the isql command
 #
