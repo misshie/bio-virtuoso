@@ -2,6 +2,7 @@
 
 require 'sinatra'
 require 'haml'
+require 'tilt/haml'
 
 VIRTUOSO = "/usr/local/virtuoso-opensource"
 ISQL     = "#{VIRTUOSO}/bin/isql"
