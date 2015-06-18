@@ -1,16 +1,20 @@
-#!/usr/local ruby
+#!/usr/local/bin/ruby
 
 require 'sinatra'
 require 'haml'
 
 VIRTUOSO = "/usr/local/virtuoso-opensource"
-ISQL     = "#{VIRTUOSO}/bin/virtuoso/isql"
-PUBLIC   = "#{VIRTUOSO}/var/lib/virsuoso/db"
+ISQL     = "#{VIRTUOSO}/bin/isql"
+PUBLIC   = "#{VIRTUOSO}/var/lib/virtuoso/db"
 
 set :public_dir, PUBLIC
 
-system("chown -R `whoamai` db", chdir:"#{VIRTUOSO}/var/lib/vertuoso")
-system("virtuoso-t", chdir:"#{VIRTUOSO}/bin")
+puts "== invoke Virtuoso on port 8890"
+print "step1: "
+puts system("chown -R `whoami` db", chdir: "#{VIRTUOSO}/var/lib/virtuoso")
+print "step2: "
+puts system("#{VIRTUOSO}/bin/virtuoso-t", chdir: PUBLIC)
+puts
 
 ##########
 get '/' do

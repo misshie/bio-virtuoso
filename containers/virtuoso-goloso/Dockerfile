@@ -63,7 +63,6 @@ RUN \
   make install && \
   rm -fr /tmp/virtuoso-opensource
 
-
 # Expose ports.
 #   - 8890: HTTP of Virtuoso
 #   - 4567: HTTP of Sinatra/Thin
@@ -74,4 +73,3 @@ EXPOSE 4567
 ADD app_root /opt/app_root
 
 CMD ["/usr/local/bin/ruby", "/opt/app_root/app.rb"]
-
