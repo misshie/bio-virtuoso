@@ -9,6 +9,9 @@ PUBLIC   = "#{VIRTUOSO}/var/lib/virsuoso/db"
 
 set :public_dir, PUBLIC
 
+system("chown -R `whoamai` db", chdir:"#{VIRTUOSO}/var/lib/vertuoso")
+system("virtuoso-t", chdir:"#{VIRTUOSO}/bin")
+
 ##########
 get '/' do
   haml :index

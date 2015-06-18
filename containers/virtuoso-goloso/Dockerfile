@@ -73,5 +73,5 @@ EXPOSE 4567
 # Start Virtuoso to import downloaded and converted data
 ADD app_root /opt/app_root
 
-CMD ["/usr/local/ruby", "/opt/app_root/app.rb"]
+CMD ["/usr/local/bin/ruby", "/opt/app_root/app.rb"]
 
