@@ -5,8 +5,9 @@ require 'haml'
 require 'tilt/haml'
 
 VIRTUOSO = "/usr/local/virtuoso-opensource"
-ISQL     = "#{VIRTUOSO}/bin/isql"
 PUBLIC   = "#{VIRTUOSO}/var/lib/virtuoso/db"
+SQLFILE  = "#{PUBLIC}/sqlfile.sql"
+ISQL     = "#{VIRTUOSO}/bin/isql localhost:1111 dba dba errors=stdout #{SQLFILE}"
 
 set :environment, :production
 set :public_dir, PUBLIC
@@ -25,6 +26,7 @@ end
 
 #################
 post '/turtle' do
+  puts "== app.rb #{Time.now}"
   halt 400, "400 BAD REQUEST" unless (params[:file] && params[:graph])
   begin
     filepath = "#{PUBLIC}/#{params[:file][:filename]}"
@@ -38,27 +40,21 @@ post '/turtle' do
     fout.close
   end
 
-  sql = <<-"SQL"
-log_enable(2,1);
-DB.DBA.TTLP_MT(file_to_string_output('#{filepath}'),'','#{params[:graph]}');
-EXIT;
-  SQL
-
-  begin
-    pipe = IO.popen(ISQL, 'w+')
-    pipe.puts sql
-    pipe.close_write
-    puts "isql: #{pipe.read}"
-  rescue IOError, SystemCallError
-    halt 500, "500 INTERNAL SERVER ERROR"
-  ensure
-    pipe.close
+  open(SQLFILE, 'w') do |fout|
+    fout.puts "log_enable(2,1);"
+    fout.puts "DB.DBA.TTLP_MT(file_to_string_output('#{filepath}'),'','#{params[:graph]}');"
+    fout.puts "EXIT;"
   end
-  halt 200, "200 OK"
+  puts "Built SQL:"
+  File.readlines(SQLFILE).each{|x| puts x}
+  puts "isql: "
+  puts `#{ISQL}`
+  ($?.exitstatus == 0) ? (halt 200, "200 OK") : (halt 500, "500 INTERNAL SERVER ERROR")
 end
 
 #################
 post '/rdfxml' do
+  puts "== app.rb #{Time.now}"
   halt 400, "400 BAD REQUEST" unless (params[:file] && params[:graph])
   begin
     filepath = "#{PUBLIC}/#{params[:file][:filename]}"
@@ -72,20 +68,14 @@ post '/rdfxml' do
     fout.close
   end
   
-  sql = <<-"SQL"
-log_enable(2,1);
-DB.DBA.RDF_LOAD_RDFXML_MT(file_to_string_output(#{filepath}'),'','#{params[:graph]}');
-EXIT;
-  SQL
-  begin
-    pipe = IO.popen(ISQL, 'w+')
-    pipe.puts sql
-    pipe.close_write
-    puts "isql: #{pipe.gets}"
-  rescue IOError, SystemCallError
-    halt 500, "500 INTERNAL SERVER ERROR #{$!}"
-  ensure
-    pipe.close
+  open(SQLFILE, 'w') do |fout|
+    fout.puts "log_enable(2,1);"
+    fout.puts "DB.DBA.RDF_LOAD_RDFXML_MT(file_to_string_output('#{filepath}'),'','#{params[:graph]}');"
+    fout.puts "EXIT;"
   end
-  halt 200, "200 OK"
+  puts "Built SQL:"
+  File.readlines(SQLFILE).each{|x| puts x}
+  puts "isql: "
+  puts `#{ISQL}`
+  ($?.exitstatus == 0) ? (halt 200, "200 OK") : (halt 500, "500 INTERNAL SERVER ERROR")
 end

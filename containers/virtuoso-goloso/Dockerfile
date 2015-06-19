@@ -66,8 +66,10 @@ RUN \
 # Expose ports.
 #   - 8890: HTTP of Virtuoso
 #   - 4567: HTTP of Sinatra/Thin
+#   - 1111: isql of Virtuoso
 EXPOSE 8890
 EXPOSE 4567
+EXPOSE 1111
 
 # Start Virtuoso to import downloaded and converted data
 ADD app_root /opt/app_root
