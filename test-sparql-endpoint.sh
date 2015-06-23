@@ -14,6 +14,7 @@ LIMIT 10
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
+echo
 
 echo ">>> TEST GO"
 query=`cat <<EOF
@@ -24,3 +25,37 @@ LIMIT 10
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
+echo
+
+echo ">>> Test HPO Annotation"
+query=`cat <<EOF
+SELECT "*"
+FROM <http://misshie.jp/rdf/phenotype_annotation.ttl> 
+WHERE { ?s ?p ?o . }
+LIMIT 10
+EOF
+`
+eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
+echo
+
+echo ">>> Test HPO Annotation (HPO team)"
+query=`cat <<EOF
+SELECT "*"
+FROM <http://misshie.jp/rdf/phenotype_annotation_hpoteam.ttl> 
+WHERE { ?s ?p ?o . }
+LIMIT 10
+EOF
+`
+eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
+echo
+
+echo ">>> Test HPO Annotation (negative annotation)"
+query=`cat <<EOF
+SELECT "*"
+FROM <http://misshie.jp/rdf/negative_phenotype_annotation.ttl>
+WHERE { ?s ?p ?o . }
+LIMIT 10
+EOF
+`
+eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
+echo

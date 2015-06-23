@@ -19,7 +19,7 @@ curl \
      ${url}
 
 file="negative_phenotype_annotation.ttl"
-graph="http://misshie.jp/rdf/phenotype_annotation.ttl"
+graph="http://misshie.jp/rdf/negative_phenotype_annotation.ttl"
 curl \
      -X POST \
      -F graph=${graph} \
