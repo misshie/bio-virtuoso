@@ -2,7 +2,7 @@
 
 ## virtuoso-goloso
 #### Purpose
-A wrupper server of the Virtuoso database engine to receive Turtle or RDF/XML files via the HTTP POST method and invoke the isql command to import them.
+A wrapper server of the Virtuoso database engine to receive Turtle or RDF/XML files via the HTTP POST method and invoke the isql command to import them.
 
 #### Start a docker container
 ```
