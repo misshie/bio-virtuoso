@@ -9,6 +9,7 @@ curl \
      -F graph=${graph} \
      -F file=@${file} \
      ${url}
+echo
 
 file="phenotype_annotation.ttl"
 graph="http://misshie.jp/rdf/phenotype_annotation.ttl"
@@ -17,6 +18,7 @@ curl \
      -F graph=${graph} \
      -F file=@${file} \
      ${url}
+echo
 
 file="negative_phenotype_annotation.ttl"
 graph="http://misshie.jp/rdf/negative_phenotype_annotation.ttl"
@@ -25,4 +27,4 @@ curl \
      -F graph=${graph} \
      -F file=@${file} \
      ${url}
-
+echo

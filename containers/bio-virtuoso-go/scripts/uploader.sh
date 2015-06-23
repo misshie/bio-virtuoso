@@ -9,4 +9,4 @@ curl \
      -F graph=${graph} \
      -F file=@${file} \
      ${url}
-
+echo
