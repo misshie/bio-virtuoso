@@ -39,8 +39,8 @@ curl \
 ```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo-annotation
-$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim
-$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim-ja
+$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-go
+$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim-gendoo-ja
 ```
 These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and checke files under /opt/bio-virtuoso.
 

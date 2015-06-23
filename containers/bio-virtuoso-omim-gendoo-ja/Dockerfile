@@ -1,7 +1,6 @@
 #
-# Upload Human Phenotype Ontology (HPO) to virtuoso-goloso
-# copyright (c) 2015, MISHIMA, Hiroyuki
-# license: the MIT license
+# Upload Japanese translation of OMIM entries by Gendoo (http://gendoo.dbcls.jp/) to virtuoso-goloso
+#
 # version 0.1
 #
 # copyright (c) 2015, MISHIMA, Hiroyuki
@@ -20,7 +19,9 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 
 # Run downloder script
-ADD scripts /opt/bio-virtuoso/hpo/
-WORKDIR /opt/bio-virtuoso/hpo/
+ADD scripts /opt/bio-virtuoso/omim-gendoo-ja/
+WORKDIR /opt/bio-virtuoso/omim-gendoo-ja
 RUN ./downloader.sh
+RUN ./converter.sh
+
 CMD ["/bin/bash", "-C", "uploader.sh"]
