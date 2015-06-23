@@ -3,7 +3,6 @@
 # when you use * in query, use it with double quartations ("*").
 
 url="http://localhost:8890/sparql"
-graph="http://misshie.jp/rdf/test-rdfxml"
 #format="text/turtle"
 format="text/tab-separated-values"
 

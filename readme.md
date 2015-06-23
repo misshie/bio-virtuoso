@@ -35,6 +35,24 @@ curl \
      url
 ```
 
+Access the SPARQL endpoint of Virtuoso
+```bash
+#!/bin/bash
+url="http://localhost:8890/sparql"
+format="text/tab-separated-values"
+#format="text/turtle"
+
+echo ">>> Test HPO"
+query=`cat <<EOF
+SELECT DISTINCT ?property
+FROM <http://purl.obolibrary.org/obo/hp.owl> 
+WHERE { ?s ?property ?o . }
+LIMIT 20
+EOF
+`
+eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
+```
+
 ## Dataset feeding docker containers
 ```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
@@ -42,12 +60,14 @@ $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuos
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-go
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim-gendoo-ja
 ```
-These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and checke files under /opt/bio-virtuoso.
+These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and checke files under `/opt/bio-virtuoso`.
 
 ## access virtuoso
 You can access Virtuoso at <http://localhost:8890/>. The SPARQL endpoint is at <http://localhost:8890/sparql>.
 
 ## License
 **Copyright**: (c) 2015; MISHIMA, Hiroyuki
+
 hmishima at nagasaki-u.ac.jp, twitter:@mishima_eng (en_US), @mishimahryk (ja_JP)
+
 **License**: The Mit license. See LICENSE.txt for further details.
