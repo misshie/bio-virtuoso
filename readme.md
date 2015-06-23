@@ -1,14 +1,16 @@
 # The Bio-Virtuoso docker container package
 
-# How to use
+## virtuoso-goloso
+### Porpose
+A wrupper server of the Virtuoso database engine to receive Turtle or RDF/XML files via the HTTP POST method and invoke the isql command to import them.
 
-## start a docker container
+### Start a docker container
 ```
-$ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 virtuoso-goloso 
+$ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 --name virtuoso-gooso virtuoso-goloso 
 ```
 
-## impote datasets
-
+### import datasets 
+For RDF/XML files:
 ```bash
 #!/bin/bash
 url="http://localhost:4567/rdfxml"
@@ -20,7 +22,7 @@ curl \
      -F file=@${file} \
      url
 ```
-
+For Turtle files:
 ```bash
 #!/bin/bash
 url="http://localhost:4567/turtle"
@@ -33,14 +35,14 @@ curl \
      url
 ```
 
-# import datassets using uploader container
+## Dataset feeding docker containers
 ```
-$ sudo docker run -it bio-virtuoso-go
-$ sudo docker run -it bio-virtuoso-hpo
-$ sudo docker run -it bio-virtuoso-hpa
-$ sudo docker run -it bio-vitruoso-omim
-$ sudo docker run -it bio-virtuoso-omim-ja
+$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
+$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo-annotation
+$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim
+$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim-ja
 ```
+These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and checke files under /opt/bio-virtuoso.
 
 # access virtuoso
 You can access Virtuoso at <http://localhost:8890/>. The SPARQL endpoint is at <http://localhost:8890/sparql>.

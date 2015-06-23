@@ -2,6 +2,9 @@
 # Upload Annotations for Human Phenotype Ontology (HPO Annotation) to virtuoso-goloso
 #
 # version 0.1
+#
+# copyright (c) 2015, MISHIMA, Hiroyuki
+# license: the MIT license
 
 # Pull base image.
 FROM ruby:2

@@ -5,6 +5,9 @@
 #
 # This Dockerfile is based on inutano/virtioso 
 # MAINTAINER Tazro Inutano Ohta, inutano@gmail.com
+#
+# copyright (c) 2015, MISHIMA, Hiroyuki
+# license: the MIT license
 
 # Pull base image.
 FROM dockerfile/ubuntu
