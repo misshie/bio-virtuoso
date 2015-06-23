@@ -20,7 +20,7 @@ curl \
      -X POST \
      -F graph=${graph} \
      -F file=@${file} \
-     url
+     ${url}
 ```
 For Turtle files:
 ```bash
@@ -32,28 +32,10 @@ curl \
      -X POST \
      -F graph=${graph} \
      -F file=@${file} \
-     url
+     ${url}
 ```
 
-Access the SPARQL endpoint of Virtuoso
-```bash
-#!/bin/bash
-url="http://localhost:8890/sparql"
-format="text/tab-separated-values"
-#format="text/turtle"
-
-echo ">>> Test HPO"
-query=`cat <<EOF
-SELECT DISTINCT ?property
-FROM <http://purl.obolibrary.org/obo/hp.owl> 
-WHERE { ?s ?property ?o . }
-LIMIT 20
-EOF
-`
-eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
-```
-
-## Dataset feeding docker containers
+## Dataset-feeding docker containers
 ```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo-annotation
@@ -64,6 +46,23 @@ These containers exits after uploading datasets to virtuoso-goloso. If you want 
 
 ## access virtuoso
 You can access Virtuoso at <http://localhost:8890/>. The SPARQL endpoint is at <http://localhost:8890/sparql>.
+
+Accessing the SPARQL endpoint from command-line:
+```bash
+#!/bin/bash
+url="http://localhost:8890/sparql"
+format="text/tab-separated-values"
+#format="text/turtle"
+
+query=`cat <<EOF
+SELECT DISTINCT ?property
+FROM <http://purl.obolibrary.org/obo/hp.owl> 
+WHERE { ?s ?property ?o . }
+LIMIT 20
+EOF
+`
+eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
+```
 
 ## License
 **Copyright**: (c) 2015; MISHIMA, Hiroyuki
