@@ -7,16 +7,9 @@
 # license: the MIT license
 
 # Pull base image.
-FROM ruby:2
+FROM misshie/ubuntu-ruby:14.04-2.2.2
 
 MAINTAINER MISHIMA, Hiroyuki <missy@be.to>
-
-# Set UTF-8 locale 
-RUN apt-get update && \
-    apt-get install -y locales && \
-    locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
 
 # Run downloder script
 ADD scripts /opt/bio-virtuoso/omim-gendoo-ja/
