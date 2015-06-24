@@ -1,0 +1,29 @@
+# -*- mode: sparql -*-
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX hpa: <http://misshie.jp/rdf/>
+PREFIX obo: <http://www.geneontology.org/formats/oboInOwl#>
+
+SELECT ?name_ja, ?db, ?obj_id, ?name_en, ?obo_id, ?hpo_label
+FROM NAMED <http://purl.obolibrary.org/obo/hp.owl>
+FROM NAMED <http://misshie.jp/rdf/phenotype_annotation.ttl>
+FROM NAMED <http://misshie.jp/rdf/omim2ja.ttl>
+WHERE {
+  GRAPH <http://misshie.jp/rdf/omim2ja.ttl> {
+    ?s1 hpa:db ?db .
+    ?s1 hpa:db_object_id ?obj_id .
+    ?s1 hpa:db_name ?name_ja .
+    FILTER(regex(?name_ja, "<%=word %>", "i"))
+  } .  	
+  GRAPH <http://misshie.jp/rdf/phenotype_annotation.ttl> {
+    ?s2 rdfs:label ?label .
+    ?s2 hpa:db ?db .
+    ?s2 hpa:db_object_id ?obj_id .
+    ?s2 hpa:db_name ?name_en .
+    ?s2 hpa:hpo_id ?hpo_id .
+  } .
+  GRAPH <http://purl.obolibrary.org/obo/hp.owl> {
+    ?hpo_id rdfs:label ?hpo_label .
+    ?hpo_id obo:id ?obo_id .
+  } .
+}

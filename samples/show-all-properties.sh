@@ -11,7 +11,6 @@ query=`cat <<EOF
 SELECT DISTINCT ?property
 FROM <http://purl.obolibrary.org/obo/hp.owl> 
 WHERE { ?s ?property ?o . }
-LIMIT 20
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
@@ -22,7 +21,6 @@ query=`cat <<EOF
 SELECT DISTINCT ?property
 FROM <http://purl.obolibrary.org/obo/go/go.owl> 
 WHERE { ?s ?property ?o . }
-LIMIT 20
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
@@ -33,7 +31,6 @@ query=`cat <<EOF
 SELECT DISTINCT ?property
 FROM <http://misshie.jp/rdf/phenotype_annotation.ttl> 
 WHERE { ?s ?property ?o . }
-LIMIT 20
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
@@ -44,7 +41,6 @@ query=`cat <<EOF
 SELECT DISTINCT ?property
 FROM <http://misshie.jp/rdf/phenotype_annotation_hpoteam.ttl> 
 WHERE { ?s ?property ?o . }
-LIMIT 20
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
@@ -55,7 +51,6 @@ query=`cat <<EOF
 SELECT DISTINCT ?property
 FROM <http://misshie.jp/rdf/negative_phenotype_annotation.ttl>
 WHERE { ?s ?property ?o . }
-LIMIT 20
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
@@ -66,7 +61,6 @@ query=`cat <<EOF
 SELECT DISTINCT ?property
 FROM <http://misshie.jp/rdf/negative_phenotype_annotation.ttl>
 WHERE { ?s ?property ?o . }
-LIMIT 10
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
@@ -77,7 +71,6 @@ query=`cat <<EOF
 SELECT DISTINCT ?property
 FROM <http://misshie.jp/rdf/omim2ja.ttl>
 WHERE { ?s ?property ?o . }
-LIMIT 10
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
