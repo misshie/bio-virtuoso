@@ -8,6 +8,7 @@ VIRTUOSO = "/usr/local/virtuoso-opensource"
 PUBLIC   = "#{VIRTUOSO}/var/lib/virtuoso/db"
 SQLFILE  = "#{PUBLIC}/sqlfile.sql"
 ISQL     = "#{VIRTUOSO}/bin/isql localhost:1111 dba dba errors=stdout #{SQLFILE}"
+DEFAULTIRI = "http://misshie.jp/rdf/default"
 
 set :environment, :production
 set :public_dir, PUBLIC
@@ -98,7 +99,7 @@ post '/n-quad' do
   
   open(SQLFILE, 'w') do |fout|
     fout.puts "log_enable(2,1);"
-    fout.puts "DB.DBA.TTLP_MT(file_to_string_output('#{filepath}'),'','',512);"
+    fout.puts "DB.DBA.TTLP_MT(file_to_string_output('#{filepath}'),'','#{DEFAULTIRI}',512);"
     fout.puts "EXIT;"
   end
   puts "Built SQL:"
