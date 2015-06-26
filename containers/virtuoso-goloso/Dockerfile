@@ -39,4 +39,4 @@ EXPOSE 1111
 # Start Virtuoso to import downloaded and converted data
 ADD app_root /opt/virtuoso-goloso/app_root
 
-CMD ["/usr/local/bin/ruby", "/opt/virtuoso-goloso/app_root/app.rb"]
+CMD ["thin", "-C", "/opt/virtuoso-goloso/app_root/thin.yml", "-R", "/opt/virtuoso-goloso/app_root/config.ru", "start"]

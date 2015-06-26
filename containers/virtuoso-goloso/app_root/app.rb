@@ -9,6 +9,7 @@ PUBLIC   = "#{VIRTUOSO}/var/lib/virtuoso/db"
 SQLFILE  = "#{PUBLIC}/sqlfile.sql"
 ISQL     = "#{VIRTUOSO}/bin/isql localhost:1111 dba dba errors=stdout #{SQLFILE}"
 DEFAULTIRI = "http://misshie.jp/rdf/default"
+FLAG = 512 + 32 # N-quad + Allows invalid symbols between '<' and '>' 
 
 set :environment, :production
 set :public_dir, PUBLIC
@@ -99,7 +100,7 @@ post '/n-quad' do
   
   open(SQLFILE, 'w') do |fout|
     fout.puts "log_enable(2,1);"
-    fout.puts "DB.DBA.TTLP_MT(file_to_string_output('#{filepath}'),'','#{DEFAULTIRI}',512);"
+    fout.puts "DB.DBA.TTLP_MT(file_to_string_output('#{filepath}'),'','#{DEFAULTIRI}',#{FLAG});"
     fout.puts "EXIT;"
   end
   puts "Built SQL:"
@@ -108,6 +109,3 @@ post '/n-quad' do
   puts `#{ISQL}`
   ($?.exitstatus == 0) ? (halt 200, "200 OK") : (halt 500, "500 INTERNAL SERVER ERROR")
 end
-
-
-
