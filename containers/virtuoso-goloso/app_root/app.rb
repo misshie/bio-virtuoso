@@ -79,3 +79,34 @@ post '/rdfxml' do
   puts `#{ISQL}`
   ($?.exitstatus == 0) ? (halt 200, "200 OK") : (halt 500, "500 INTERNAL SERVER ERROR")
 end
+
+#################
+post '/n-quad' do
+  puts "== app.rb #{Time.now}"
+  halt 400, "400 BAD REQUEST" unless (params[:file])
+  begin
+    filepath = "#{PUBLIC}/#{params[:file][:filename]}"
+    fout = File.open(filepath, 'wb')
+    puts "post: #{filepath}"
+    puts "graph: ignored for N-Quads"
+    fout.write params[:file][:tempfile].read
+  rescue IOError, SystemCallError
+    halt 500, "500 INTERNAL SERVER ERROR"
+  ensure
+    fout.close
+  end
+  
+  open(SQLFILE, 'w') do |fout|
+    fout.puts "log_enable(2,1);"
+    fout.puts "DB.DBA.RDF_LOAD_RDFXML_MT(file_to_string_output('#{filepath}'),'','',512);"
+    fout.puts "EXIT;"
+  end
+  puts "Built SQL:"
+  File.readlines(SQLFILE).each{|x| puts x}
+  puts "isql: "
+  puts `#{ISQL}`
+  ($?.exitstatus == 0) ? (halt 200, "200 OK") : (halt 500, "500 INTERNAL SERVER ERROR")
+end
+
+
+

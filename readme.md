@@ -35,6 +35,18 @@ curl \
      ${url}
 ```
 
+For N-Quad files:
+```bash
+#!/bin/bash
+url="http://localhost:4567/n-quad"
+file="N-Quad.nq"
+curl \
+     -X POST \
+     -F graph=${graph} \
+     -F file=@${file} \
+     ${url}
+```
+
 ## Dataset-feeding docker containers
 ```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
