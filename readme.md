@@ -42,7 +42,6 @@ url="http://localhost:4567/n-quad"
 file="N-Quad.nq"
 curl \
      -X POST \
-     -F graph=${graph} \
      -F file=@${file} \
      ${url}
 ```
