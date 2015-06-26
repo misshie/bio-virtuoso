@@ -98,7 +98,7 @@ post '/n-quad' do
   
   open(SQLFILE, 'w') do |fout|
     fout.puts "log_enable(2,1);"
-    fout.puts "DB.DBA.RDF_LOAD_RDFXML_MT(file_to_string_output('#{filepath}'),'','',512);"
+    fout.puts "DB.DBA.TTLP_MT(file_to_string_output('#{filepath}'),'','',512);"
     fout.puts "EXIT;"
   end
   puts "Built SQL:"

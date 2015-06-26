@@ -52,8 +52,11 @@ $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuos
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo-annotation
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-go
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim-gendoo-ja
+$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim
 ```
 These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and checke files under `/opt/bio-virtuoso`.
+
+bio-virtuoso-omim downloads its dataset from [Bio2RDF.org](http://bio2rdf.org/ "Bio2RDF").
 
 ## access virtuoso
 You can access Virtuoso at <http://localhost:8890/>. The SPARQL endpoint is at <http://localhost:8890/sparql>.
