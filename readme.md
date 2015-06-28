@@ -6,7 +6,7 @@ A wrapper server of the Virtuoso database engine to receive Turtle or RDF/XML fi
 
 #### Start a docker container
 ```
-$ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 --name virtuoso-gooso virtuoso-goloso 
+$ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 --name virtuoso-goloso virtuoso-goloso 
 ```
 
 #### Import datasets 
@@ -22,7 +22,7 @@ curl \
      -F file=@${file} \
      ${url}
 ```
-For Turtle files:
+For Turtle/N3 files:
 ```bash
 #!/bin/bash
 url="http://localhost:4567/turtle"
