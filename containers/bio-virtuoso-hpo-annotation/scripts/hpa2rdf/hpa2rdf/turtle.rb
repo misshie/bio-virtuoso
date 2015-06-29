@@ -21,6 +21,25 @@ module Hpa2rdf
       ]
     end
 
+    def self.property_definitions
+      [
+       triple("hpa:db",            "rdfs:label", '"databse name like OMIM,OHPHANET,DECIPER.."'),
+       triple("hpa:db_object_id",  "rdfs:label", '"id within the db"',),
+       triple("hpa:db_name",       "rdfs:label", '"entry name within the db"',),
+       triple("hpa:qualifier",     "rdfs:label", '"HPO-annotation qualifier"',),
+       triple("hpa:hpo_id",        "rdfs:label", '"HPO ID like HP:9999999"',),
+       triple("hpa:db_reference",  "rdfs:label", '"DB ID like OMIM:9999999"',),
+       triple("hpa:evidence_code", "rdfs:label", '"evidence code"',),
+       triple("hpa:onset",         "rdfs:label", '"optional HPO-annotation onset"',),
+       triple("hpa:frequency",     "rdfs:label", '"optional HPO-annotation frequenct"',),
+       triple("hpa:with",          "rdfs:label", '"optional HPO-annotation with"',),
+       triple("hpa:aspect",        "rdfs:label", '"HPO annotation aspect"',),
+       triple("hpa:synomym",       "rdfs:label", '"optional HPO annot synonym"',),
+       triple("hpa:date",          "rdfs:label", '"HPO-annotation data"',),
+       triple("hpa:assigned_by",   "rdfs:label", '"HPO-annotation assignment"',),
+      ]
+    end                         
+
     def self.triple(s, p, o)
       [s, p, o].join("\t") + ' .'
     end

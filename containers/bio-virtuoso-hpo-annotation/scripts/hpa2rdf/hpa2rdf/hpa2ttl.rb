@@ -52,6 +52,7 @@ module Hpa2rdf
 
     def run
       Turtle.default_prefix.each{|x| puts x}
+      Turtle.property_definitions.each{|x| puts x}
       puts
       puts_schema
       ARGF.each_line do |row|

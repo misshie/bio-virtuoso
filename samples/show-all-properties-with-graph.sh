@@ -7,12 +7,17 @@ url="http://localhost:8890/sparql"
 format="text/tab-separated-values"
 
 query=`cat <<EOF
-SELECT DISTINCT ?p, ?g
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?p, ?g, ?cmt
 WHERE
 {
-  { ?s ?p ?o . }
+  { ?s ?p ?o .
+    OPTIONAL {?p rdfs:label ?cmt .} }
 UNION
-  { GRAPH ?g {?s ?p ?o . } }
+  { GRAPH ?g {?s ?p ?o . 
+              OPTIONAL { ?p rdfs:label ?cmt . } }
+  }
 }
 ORDER BY ?p
 
