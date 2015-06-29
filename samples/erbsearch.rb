@@ -1,11 +1,13 @@
 #!/usr/bin/env ruby
+
 require 'fileutils'
 require 'erubis'
 require 'tempfile'
+require 'optparse'
 
 URL = "http://localhost:8890/sparql"
 FORMAT = "text/tab-separated-values"
-QUERY1 = "query1.sparql.erb"
+DEFAULTQ = "default.sparql.erb"
 TEMP = "__TEMP__.txt"
 
 class SqSearch
@@ -21,17 +23,17 @@ class SqSearch
     results
   end
 
-  def search_word(word)
-    sparql = Erubis::Eruby.new(File.read(QUERY1))
+  def search_word(qfile, word)
+    sparql = Erubis::Eruby.new(File.read(qfile))
     submit_query sparql.result(word: word)
   end
 
   def run
+    query = OptionParser.getopts("q:")
+    qfile = query["q"]
+    qfile ||= DEFAULTQ
     ARGF.each_line do |row|
-      row.chomp!
-      next if row.start_with? '#'
-      next if row.empty?
-      puts search_word(row)
+      puts search_word(qfile, row.chomp)
     end
   end
 end
