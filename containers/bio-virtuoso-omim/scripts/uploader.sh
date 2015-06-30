@@ -3,13 +3,11 @@
 nquad="http://virtuoso-goloso:4567/n-quad"
 gzfile="omim.nq.gz"
 file="omim.nq"
-timeout=300
 
 zcat ${gzfile} > ${file}
 curl \
     -X POST \
     -F file=@${file} \
-    --max-time ${timeout} \
     ${nquad}
 rm ${file}
 echo
