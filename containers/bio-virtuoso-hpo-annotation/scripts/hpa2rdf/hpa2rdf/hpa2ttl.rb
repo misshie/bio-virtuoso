@@ -35,10 +35,10 @@ module Hpa2rdf
       # when "DECIPHER"
       #   #
       # end
-      Turtle.puts_triple(uuid, "hpa:db_object_id",  hpa.db_object_id)
+      Turtle.puts_triple_q(uuid, "hpa:db_object_id",  hpa.db_object_id)
       Turtle.puts_triple_q(uuid, "hpa:db_name",       hpa.db_name, "@en")
       Turtle.puts_triple_q(uuid, "hpa:qualifier",     hpa.qualifier)
-      Turtle.puts_triple(uuid, "hpa:hpo_id",        "obo:HP_#{hpa.hpo_id.split(':')[1]}")
+      Turtle.puts_triple(uuid, "hpa:hpo_id",          "obo:HP_#{hpa.hpo_id.split(':')[1]}")
       Turtle.puts_triple_q(uuid, "hpa:db_reference",  hpa.db_reference)
       Turtle.puts_triple_q(uuid, "hpa:evidence_code", hpa.evidence_code)
       Turtle.puts_triple_q(uuid, "hpa:onset",         hpa.onset)
