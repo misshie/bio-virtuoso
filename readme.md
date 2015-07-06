@@ -54,6 +54,7 @@ $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuos
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim-gendoo-ja
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hgnc
+$ sudo docker run -it --link virtuoso-goloso:virtuoso-goloso misshie/bio-virtuoso-orphanet
 ```
 These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and checke files under `/opt/bio-virtuoso`.
 

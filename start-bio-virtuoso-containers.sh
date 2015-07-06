@@ -30,4 +30,7 @@ docker run \
     --link virtuoso-goloso:virtuoso-goloso \
     misshie/bio-virtuoso-hgnc
 
-    
+docker run \
+    -i -t \
+    --link virtuoso-goloso:virtuoso-goloso \
+    misshie/bio-virtuoso-orphanet
