@@ -28,7 +28,7 @@ open("#{PUBLIC}/virtuoso.ini", 'w') do |fout|
       when /\AMaxQueryCostEstimationTime/
         next
       when /\AMaxQueryExecutionTime/
-        fout.puts "MaxQueryExecutionTime = 300"
+        fout.puts "MaxQueryExecutionTime = 1000"
         next
       else
         fout.puts row
