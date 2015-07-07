@@ -17,7 +17,12 @@ set :public_dir, PUBLIC
 puts "== invoke Virtuoso on port 8890"
 print "step1: "
 puts system("chown -R `whoami` db", chdir: "#{VIRTUOSO}/var/lib/virtuoso")
+
 print "step2: "
+puts system("cp virtuoso.ini virtuoso.ini.orig", chdir: PUBLIC)
+puts system("sed -e 's/^MaxQueryCostEstimationTime/;MaxQueryCostEstimationTime/' virtuoso.ini.orig > virtuoso.ini", chdir: PUBLIC)
+
+print "step3: "
 puts system("#{VIRTUOSO}/bin/virtuoso-t", chdir: PUBLIC)
 puts
 
