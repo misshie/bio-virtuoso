@@ -1,7 +1,7 @@
 #!/bin/bash
 
 url="http://virtuoso-goloso:4567/turtle"
-graph="http://www.monarchinitiative.org/hpoa_dataset.ttl"
+graph="http://data.monarchinitiative.org/ttl/hpoa_dataset.ttl"
 file="hpoa_dataset.ttl"
 
 curl \
@@ -12,7 +12,7 @@ curl \
 echo
 
 url="http://virtuoso-goloso:4567/turtle"
-graph="http://www.monarchinitiative.org/hpoa.ttl"
+graph="http://data.monarchinitiative.org/ttl/hpoa.ttl
 file="hpoa.ttl"
 
 curl \

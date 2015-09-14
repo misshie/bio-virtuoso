@@ -47,23 +47,28 @@ curl \
 ```
 
 ## Dataset-feeding docker containers
+A commandline to run a dataset-feeding container:
+
 ```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
 ```
 
+These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and checke files under `/opt/bio-virtuoso`.
+
+#### list of dataset feeding containers (misshie/bio-virtuoso-*)
+
 |container               |graph URL|description|
-|:-----------------------|:-----------------------------------------|:-------------------------------------------|
-|hpo-annotation-monarch  |http://www.monarchinitiative.org/hpoa.ttl |HPO annotation RDFied by Monarch Initiative |
-|omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl         |Gendoo's ja_JP translation of OMIM entries  |
+|:-----------------------|:------------------------------------------------------|:-------------------------------------------|
+|hpo-annotation-monarch  |http://data.monarchinitiative.org/ttl/hpoa.ttl         |HPO annotation RDFied by Monarch Initiative |
+|                        |http://data.monarchinitiative.org/ttl/hpoa_dataset.ttl |HPO annotation dataset description          |
+|omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl                      |Gendoo's ja_JP translation of OMIM entries  |
 
 ```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-go
-
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hgnc
 $ sudo docker run -it --link virtuoso-goloso:virtuoso-goloso misshie/bio-virtuoso-orphanet
 ```
-These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and checke files under `/opt/bio-virtuoso`.
 
 bio-virtuoso-omim and -hgnc download their dataset from [Bio2RDF.org](http://bio2rdf.org/ "Bio2RDF").
 
