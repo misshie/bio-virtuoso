@@ -50,7 +50,7 @@ curl \
 A commandline to run a dataset-feeding container:
 
 ```
-$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
+$ sudo docker run -it --link virtuoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
 ```
 
 These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and check files under `/opt/bio-virtuoso`.
