@@ -49,9 +49,16 @@ curl \
 ## Dataset-feeding docker containers
 ```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
-$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo-annotation
+```
+
+|container               |graph URL|description|
+|:-----------------------|:-----------------------------------------|:-------------------------------------------|
+|hpo-annotation-monarch  |http://www.monarchinitiative.org/hpoa.ttl |HPO annotation RDFied by Monarch Initiative |
+|omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl         |Gendoo's ja_JP translation of OMIM entries  |
+
+```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-go
-$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim-gendoo-ja
+
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hgnc
 $ sudo docker run -it --link virtuoso-goloso:virtuoso-goloso misshie/bio-virtuoso-orphanet
