@@ -59,19 +59,19 @@ These containers exits after uploading datasets to virtuoso-goloso. If you want 
 
 |container               |graph URL|description|
 |:-----------------------|:----------------------------------------------------------|:-------------------------------------------|
+|hpo                     |http://purl.obolibrary.org/obo/hp.owl                      |Human Phenotype Ontology (HPO)              |
 |hpo-annotation-monarch  |http://data.monarchinitiative.org/ttl/hpoa.ttl             |HPO annotation RDFied by Monarch Initiative |
 |                        |http://data.monarchinitiative.org/ttl/hpoa_dataset.ttl     |HPO annotation dataset description          |
 |omim-monarch            |http://data.monarchinitiative.org/ttl/omim.ttl             |OMIM RDFied by Monarch Initiative           |
 |                        |http://data.monarchinitiative.org/ttl/omim_dataset.ttl     |OMIM dataset description                    |
 |orphanet-monarch        |http://data.monarchinitiative.org/ttl/orphanet.ttl         |Orphanet RDFied by Monarch Initiative       |
 |                        |http://data.monarchinitiative.org/ttl/orphanet_dataset.ttl |Orphanet dataset description                |
+|go                      |http://purl.obolibrary.org/obo/go.owl                      |Gene Ontology (GO)                          |
 |omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl                          |Gendoo's ja_JP translation of OMIM entries  |
 
 ```
-$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-go
-$ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-omim
+
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hgnc
-$ sudo docker run -it --link virtuoso-goloso:virtuoso-goloso misshie/bio-virtuoso-orphanet
 ```
 
 bio-virtuoso-omim and -hgnc download their dataset from [Bio2RDF.org](http://bio2rdf.org/ "Bio2RDF").
