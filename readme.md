@@ -58,12 +58,14 @@ These containers exits after uploading datasets to virtuoso-goloso. If you want 
 #### list of dataset feeding containers (misshie/bio-virtuoso-*)
 
 |container               |graph URL|description|
-|:-----------------------|:------------------------------------------------------|:-------------------------------------------|
-|hpo-annotation-monarch  |http://data.monarchinitiative.org/ttl/hpoa.ttl         |HPO annotation RDFied by Monarch Initiative |
-|                        |http://data.monarchinitiative.org/ttl/hpoa_dataset.ttl |HPO annotation dataset description          |
-|omim-monarch            |http://data.monarchinitiative.org/ttl/omim.ttl         |OMIM RDFied by Monarch Initiative           |
-|                        |http://data.monarchinitiative.org/ttl/omim_dataset.ttl |OMIM dataset description                    |
-|omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl                      |Gendoo's ja_JP translation of OMIM entries  |
+|:-----------------------|:----------------------------------------------------------|:-------------------------------------------|
+|hpo-annotation-monarch  |http://data.monarchinitiative.org/ttl/hpoa.ttl             |HPO annotation RDFied by Monarch Initiative |
+|                        |http://data.monarchinitiative.org/ttl/hpoa_dataset.ttl     |HPO annotation dataset description          |
+|omim-monarch            |http://data.monarchinitiative.org/ttl/omim.ttl             |OMIM RDFied by Monarch Initiative           |
+|                        |http://data.monarchinitiative.org/ttl/omim_dataset.ttl     |OMIM dataset description                    |
+|orphanet-monarch        |http://data.monarchinitiative.org/ttl/orphanet.ttl         |OMIM RDFied by Monarch Initiative           |
+|                        |http://data.monarchinitiative.org/ttl/orphanet_dataset.ttl |OMIM dataset description                    |
+|omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl                          |Gendoo's ja_JP translation of OMIM entries  |
 
 ```
 $ sudo docker run -it --link virutoso-goloso:virtuoso-goloso misshie/bio-virtuoso-go
