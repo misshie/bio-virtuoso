@@ -1,0 +1,12 @@
+# -*- mode: sparql -*-
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX hpa: <http://www.monarchinitiatives.org/>
+
+SELECT ?property
+FROM NAMED <http://www.monarchinitiatives.org/hpoa.ttl>
+WHERE {
+  GRAPH <http://www.monarchinitiatives.org/hpoa.ttl> {
+    ?property a rdfs:Property .
+  } .
+}
