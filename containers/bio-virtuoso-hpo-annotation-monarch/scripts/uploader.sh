@@ -12,7 +12,7 @@ curl \
 echo
 
 url="http://virtuoso-goloso:4567/turtle"
-graph="http://data.monarchinitiative.org/ttl/hpoa.ttl
+graph="http://data.monarchinitiative.org/ttl/hpoa.ttl"
 file="hpoa.ttl"
 
 curl \
