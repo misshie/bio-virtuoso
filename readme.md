@@ -61,6 +61,8 @@ These containers exits after uploading datasets to virtuoso-goloso. If you want 
 |:-----------------------|:------------------------------------------------------|:-------------------------------------------|
 |hpo-annotation-monarch  |http://data.monarchinitiative.org/ttl/hpoa.ttl         |HPO annotation RDFied by Monarch Initiative |
 |                        |http://data.monarchinitiative.org/ttl/hpoa_dataset.ttl |HPO annotation dataset description          |
+|omim-monarch            |http://data.monarchinitiative.org/ttl/omim.ttl         |OMIM RDFied by Monarch Initiative           |
+|                        |http://data.monarchinitiative.org/ttl/omim_dataset.ttl |OMIM dataset description                    |
 |omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl                      |Gendoo's ja_JP translation of OMIM entries  |
 
 ```
