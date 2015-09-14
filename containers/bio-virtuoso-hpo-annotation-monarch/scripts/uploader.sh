@@ -1,6 +1,6 @@
 #!/bin/bash
 
-url="http://virtuoso-goloso:4567/rdfxml"
+url="http://virtuoso-goloso:4567/turtle"
 graph="http://www.monarchinitiative.org/hpoa_dataset.ttl"
 file="hpoa_dataset.ttl"
 
@@ -11,7 +11,7 @@ curl \
      ${url}
 echo
 
-url="http://virtuoso-goloso:4567/rdfxml"
+url="http://virtuoso-goloso:4567/turtle"
 graph="http://www.monarchinitiative.org/hpoa.ttl"
 file="hpoa.ttl"
 
