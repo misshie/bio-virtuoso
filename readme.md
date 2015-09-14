@@ -6,7 +6,7 @@ A wrapper server of the Virtuoso database engine to receive Turtle or RDF/XML fi
 
 #### Start a docker container
 ```
-$ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 --name virtuoso-goloso virtuoso-goloso 
+$ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 --name virtuoso-goloso misshie/virtuoso-goloso 
 ```
 
 #### Import datasets 
