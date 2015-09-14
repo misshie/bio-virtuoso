@@ -36,11 +36,11 @@ open("#{PUBLIC}/virtuoso.ini", 'w') do |fout|
     end
   end
 #  1Gbyte RAM
-  fout.puts "NumberOfBuffers = 85000"
-  fout.puts "MaxDirtyBuffers = 65000"
+#  fout.puts "NumberOfBuffers = 85000"
+#  fout.puts "MaxDirtyBuffers = 65000"
 #  48Gbyte RAM
-#  fout.puts "NumberOfBuffers = 4000000"
-#  fout.puts "MaxDirtyBuffers = 3000000"
+  fout.puts "NumberOfBuffers = 4000000"
+  fout.puts "MaxDirtyBuffers = 3000000"
 end
 puts "done"
 
