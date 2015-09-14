@@ -1,8 +1,8 @@
 #!/bin/bash
 
 url="http://virtuoso-goloso:4567/turtle"
-graph="http://data.monarchinitiative.org/ttl/orphanet_dataset.ttl"
-file="orphanet_dataset.ttl"
+graph="http://data.monarchinitiative.org/ttl/hgnc_dataset.ttl"
+file="hgnc_dataset.ttl"
 
 curl \
      -X POST \
@@ -12,8 +12,8 @@ curl \
 echo
 
 url="http://virtuoso-goloso:4567/turtle"
-graph="http://data.monarchinitiative.org/ttl/orphanet.ttl
-file="orphanets.ttl"
+graph="http://data.monarchinitiative.org/ttl/hgnc.ttl
+file="hgnc.ttl"
 
 curl \
      -X POST \
