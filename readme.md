@@ -2,51 +2,28 @@
 
 ## virtuoso-goloso
 #### Purpose
-A wrapper server of the Virtuoso database engine to receive Turtle or RDF/XML files via the HTTP POST method and invoke the isql command to import them.
+Docker containers for easy deploying the Virtuoso database engine with preloaded multiple RDF biodatabases.
+
+The virtuoso-gloso container runs a instance of Virtuoso. Sinatra receives Turtle, RDF/XML, or OWL files via the HTTP POST method and put them into Virtuoso speedy using the isql command.
+
+Dataset feeding containers download data from sources, if necessary, convert them into RDF, and send them to virtuoso-gloso. You can combine multiple feeding containers.
 
 #### Start a docker container
+The misshie/virtuoso-goloso container is stored in DockerHub at https://hub.docker.com/r/misshie/virtuoso-goloso/ .
+
 ```
 $ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 --name virtuoso-goloso misshie/virtuoso-goloso 
 ```
 
-#### Import datasets 
-For RDF/XML files:
-```bash
-#!/bin/bash
-url="http://localhost:4567/rdfxml"
-file="rdfxml.rdf"
-graph="http://misshie.jp/rdf/test-rdfxml"
-curl \
-     -X POST \
-     -F graph=${graph} \
-     -F file=@${file} \
-     ${url}
-```
-For Turtle/N3 files:
-```bash
-#!/bin/bash
-url="http://localhost:4567/turtle"
-graph="http://misshie.jp/rdf/test-turtle"
-file="turtle.ttl"
-curl \
-     -X POST \
-     -F graph=${graph} \
-     -F file=@${file} \
-     ${url}
-```
-
-For N-Quad files:
-```bash
-#!/bin/bash
-url="http://localhost:4567/n-quad"
-file="N-Quad.nq"
-curl \
-     -X POST \
-     -F file=@${file} \
-     ${url}
-```
-
 ## Dataset-feeding docker containers
+You have to build dataset-feeding containers to ensure the dataset is up-to-date.
+
+```
+$ git clone git://github.com/misshie/bio-virtuoso.git
+$ cd bio-virtuoso/containers/bio-virtuoso-hpo
+$ sudo docker build -t misshie/bio-virtuso-hpo .
+```
+
 A commandline to run a dataset-feeding container:
 
 ```
@@ -89,6 +66,43 @@ LIMIT 20
 EOF
 `
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
+```
+
+## Feeding datasets (inside dataset feeding container)
+For RDF/XML files:
+```bash
+#!/bin/bash
+url="http://localhost:4567/rdfxml"
+file="rdfxml.rdf"
+graph="http://misshie.jp/rdf/test-rdfxml"
+curl \
+     -X POST \
+     -F graph=${graph} \
+     -F file=@${file} \
+     ${url}
+```
+For Turtle/N3 files:
+```bash
+#!/bin/bash
+url="http://localhost:4567/turtle"
+graph="http://misshie.jp/rdf/test-turtle"
+file="turtle.ttl"
+curl \
+     -X POST \
+     -F graph=${graph} \
+     -F file=@${file} \
+     ${url}
+```
+
+For N-Quad files:
+```bash
+#!/bin/bash
+url="http://localhost:4567/n-quad"
+file="N-Quad.nq"
+curl \
+     -X POST \
+     -F file=@${file} \
+     ${url}
 ```
 
 ## License
