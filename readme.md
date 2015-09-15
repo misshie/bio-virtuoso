@@ -2,7 +2,7 @@
 
 ## virtuoso-goloso
 #### Purpose
-Docker containers for easy deploying the Virtuoso database engine with preloaded multiple RDF biodatabases.
+Docker containers for easy deployment of the Virtuoso database engine with preloaded multiple biodatabases expressed by RDF.
 
 The virtuoso-gloso container runs a instance of Virtuoso. Sinatra receives Turtle, RDF/XML, or OWL files via the HTTP POST method and put them into Virtuoso speedy using the isql command.
 
@@ -14,6 +14,8 @@ The misshie/virtuoso-goloso container is stored in DockerHub at https://hub.dock
 ```
 $ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 --name virtuoso-goloso misshie/virtuoso-goloso 
 ```
+
+If you have much RAM in your machine, try misshie/virtuoso-goloso-48g
 
 ## Dataset-feeding docker containers
 You have to build dataset-feeding containers to ensure the dataset is up-to-date.
