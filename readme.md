@@ -70,7 +70,9 @@ EOF
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
 ```
 
-## Feeding datasets (inside dataset feeding container)
+## How to feed datasets
+Dataset feeding containers use the following way to feed RDF files to virtuoso-goloso
+
 For RDF/XML files:
 ```bash
 #!/bin/bash
