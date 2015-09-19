@@ -49,6 +49,7 @@ These containers exits after uploading datasets to virtuoso-goloso. If you want 
 |                        |http://data.monarchinitiative.org/ttl/hgnc_dataset.ttl     |HGNC dataset description                    |
 |go                      |http://purl.obolibrary.org/obo/go.owl                      |Gene Ontology (GO)                          |
 |omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl                          |Gendoo's ja_JP translation of OMIM entries  |
+|mp-jax                  |http://purl.obolibrary.org/obo/mp.owl                      |Mammalian Phenotype ontology (MP) of Jax    |
 
 ## access virtuoso
 You can access Virtuoso at <http://localhost:8890/>. The SPARQL endpoint is at <http://localhost:8890/sparql>.
