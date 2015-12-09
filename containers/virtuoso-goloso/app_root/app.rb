@@ -11,6 +11,18 @@ ISQL     = "#{VIRTUOSO}/bin/isql localhost:1111 dba dba errors=stdout #{SQLFILE}
 DEFAULTIRI = "http://misshie.jp/rdf/default"
 FLAG = 512 + 32 # N-quad + Allows invalid symbols between '<' and '>' 
 
+MaxQueryCostEstimationTime = ENV['MaxQueryCostEstimationTime']
+MaxQueryExecutionTime = ENV['MaxQueryExecutionTime']
+MaxQueryExecutionTime ||= "21600" # 6hrs
+NumberOfBuffers = ENV['NumberOfBuffers']
+NumberOfBuffers ||= '85000' # 4000000 for 48Gb RAM
+MaxDirtyBuffers = ENV['MaxDirtyBuffers']
+MaxDirtyBuffers ||= '65000' # 3000000 for 48Gb RAM
+SQL_PREFETCH_ROWS = ENV['SQL_PREFETCH_ROWS']
+SQL_PREFETCH_ROWS ||= '10000'
+SQL_PREFETCH_BYTES = ENV['SQL_PREFETCH_BYTES']
+SQL_PREFETCH_BYTES ||= '160000'
+
 set :environment, :production
 set :public_dir, PUBLIC
 
@@ -25,22 +37,18 @@ open("#{PUBLIC}/virtuoso.ini", 'w') do |fout|
     fin.each_line do |row|
       row.chomp
       case row
-      when /\AMaxQueryCostEstimationTime/
-        next
-      when /\AMaxQueryExecutionTime/
-        fout.puts "MaxQueryExecutionTime = 21600" # 6hrs
+      when /\AMaxQueryCostEstimationTime/,
+          /\AMaxQueryExecutionTime/
         next
       else
         fout.puts row
       end
     end
   end
-#  1Gbyte RAM
-  fout.puts "NumberOfBuffers = 85000"
-  fout.puts "MaxDirtyBuffers = 65000"
-#  48Gbyte RAM
-#  fout.puts "NumberOfBuffers = 4000000"
-#  fout.puts "MaxDirtyBuffers = 3000000"
+  fout.puts "MaxQueryCostEstimationTime = #{MaxQueryCostEstimationTime}" unless MaxQueryCostEstimationTime
+  fout.puts "MaxQueryExecutionTime = #{MaxQueryExecutionTime}" 
+  fout.puts "NumberOfBuffers = #{NumberOfBuffers}"
+  fout.puts "MaxDirtyBuffers = #{MaxDirtyBuffers}"
 end
 puts "done"
 
