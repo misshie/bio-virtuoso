@@ -1,8 +1,11 @@
 #!/bin/bash
 
-docker stop virtuoso-goloso
-docker rm virtuoso-goloso
+echo "try to stop/rm misshie:virtuoso-goloso" 
+docker stop misshie/virtuoso-goloso
+docker rm misshie/virtuoso-goloso
+echo "CMD: thin -C /opt/virtuoso-goloso/app_root/thin.yml -R /opt/virtuoso-goloso/app_root/config.ru start"
 docker run \
+    --rm \
     -i -t \
     -p 1111:1111 \
     -p 8890:8890 \
@@ -13,8 +16,8 @@ docker run \
     -e MaxDirtyBuffers="65000" \
     -e SQL_PREFETCH_ROWS="10000" \
     -e SQL_PREFETCH_BYTES="160000" \
-    misshie/virtuoso-goloso
-
+    misshie/virtuoso-goloso \
+    /bin/bash
 # 1) default is undefined
 #    MaxQueryCostEstimationTime
 # 2) default values

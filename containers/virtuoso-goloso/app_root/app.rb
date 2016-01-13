@@ -37,15 +37,14 @@ open("#{PUBLIC}/virtuoso.ini", 'w') do |fout|
     fin.each_line do |row|
       row.chomp
       case row
-      when /\AMaxQueryCostEstimationTime/,
-          /\AMaxQueryExecutionTime/
+      when /\AMaxQueryCostEstimationTime/, /\AMaxQueryExecutionTime/
         next
       else
         fout.puts row
       end
     end
   end
-  fout.puts "MaxQueryCostEstimationTime = #{MaxQueryCostEstimationTime}" unless MaxQueryCostEstimationTime
+  fout.puts "MaxQueryCostEstimationTime = #{MaxQueryCostEstimationTime}" if MaxQueryCostEstimationTime
   fout.puts "MaxQueryExecutionTime = #{MaxQueryExecutionTime}" 
   fout.puts "NumberOfBuffers = #{NumberOfBuffers}"
   fout.puts "MaxDirtyBuffers = #{MaxDirtyBuffers}"

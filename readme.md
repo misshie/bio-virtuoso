@@ -11,11 +11,29 @@ Dataset feeding containers download data from sources, if necessary, convert the
 #### Start a docker container
 The misshie/virtuoso-goloso container is stored in DockerHub at https://hub.docker.com/r/misshie/virtuoso-goloso/ .
 
+A sample script to invoke virtuoso-goloso is the following:
 ```
-$ sudo docker run -it -p 1111:1111 -p 8890:8890 -p 4567:4567 --name virtuoso-goloso misshie/virtuoso-goloso 
+#!/bin/bash
+docker stop virtuoso-goloso
+docker rm virtuoso-goloso
+docker run \
+    -i -t \
+    -p 1111:1111 \
+    -p 8890:8890 \
+    -p 4567:4567 \
+    --name virtuoso-goloso \
+    -e MaxQueryExecutionTime="21600" \
+    -e NumberOfBuffers="85000" \
+    -e MaxDirtyBuffers="65000" \
+    -e SQL_PREFETCH_ROWS="10000" \
+    -e SQL_PREFETCH_BYTES="160000" \
+    misshie/virtuoso-goloso
 ```
 
-If you have much RAM in your machine, try misshie/virtuoso-goloso-48g
+Virtuoso-goloso supports the following environmental viriables given with the '-e' option:
+ 
+
+
 
 ## Dataset-feeding docker containers
 You have to build dataset-feeding containers to ensure the dataset is up-to-date.
