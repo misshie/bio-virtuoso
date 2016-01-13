@@ -29,11 +29,16 @@ docker run \
     -e SQL_PREFETCH_BYTES="160000" \
     misshie/virtuoso-goloso
 ```
-
 Virtuoso-goloso supports the following environmental viriables given with the '-e' option:
- 
 
-
+|environment variable      |defalul value|comment|
+|:-------------------------|:------------|:------------|
+|MaxQueryCostEstimationTime|undefined    ||
+|MaxQueryExecutionTime     |21600        |6hrs|
+|NumberOfBuffers           |85000        |4000000 is good for 48Gb RAM machines|
+|MaxDirtyBuffers           |65000        |3000000 is good for 48Gb RAM machines|
+|SQL_PREFETCH_ROWS         |10000        ||
+|SQL_PREFETCH_BYTES        |160000       ||
 
 ## Dataset-feeding docker containers
 You have to build dataset-feeding containers to ensure the dataset is up-to-date.

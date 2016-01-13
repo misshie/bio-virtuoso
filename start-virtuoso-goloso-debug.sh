@@ -4,6 +4,7 @@ echo "try to stop/rm misshie:virtuoso-goloso"
 docker stop misshie/virtuoso-goloso
 docker rm misshie/virtuoso-goloso
 echo "CMD: thin -C /opt/virtuoso-goloso/app_root/thin.yml -R /opt/virtuoso-goloso/app_root/config.ru start"
+echo "see also /usr/local/virtuoso-opensource/var/lib/virtuoso/db/Virtuoso.ini
 docker run \
     --rm \
     -i -t \
