@@ -31,7 +31,7 @@ docker run \
 ```
 Virtuoso-goloso supports the following environmental viriables given with the '-e' option:
 
-|environment variable      |defalul value|comment|
+|environment variable      |default value|comment|
 |:-------------------------|:------------|:------------|
 |MaxQueryCostEstimationTime|undefined    ||
 |MaxQueryExecutionTime     |21600        |6hrs|
