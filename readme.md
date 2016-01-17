@@ -108,7 +108,7 @@ EOF
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
 ```
 
-### Inside data-feeding containerHow to feed datasets
+### Inside data-feeding container
 Dataset feeding containers use the following ways to feed RDF files to virtuoso-goloso
 
 For RDF/XML files:
