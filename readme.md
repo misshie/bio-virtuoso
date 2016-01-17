@@ -9,12 +9,16 @@ The virtuoso-gloso container runs a instance of Virtuoso. Sinatra receives Turtl
 Dataset feeding containers download data from sources, if necessary, convert them into RDF, and send them to virtuoso-gloso. You can combine multiple feeding containers.
 
 #### Clone Bio-Virtuoso
-To use sample shell scripts, run `git clone https://github.com/misshie/bio-virtuoso.git`
+To use sample shell scripts, run 
+```bash
+$ git clone git://github.com/misshie/bio-virtuoso.git
+$ cd bio-virtuoso
+```
 
 #### Start a docker container
 The misshie/virtuoso-goloso container is stored in DockerHub at https://hub.docker.com/r/misshie/virtuoso-goloso/ .
 
-A sample script to invoke virtuoso-goloso is the following. Try `sudo ./start-virtuoso-goloso.sh` or `sudo ./start-virtuoso-goloso-largemem.sh`):
+A sample script to invoke virtuoso-goloso is the following. See also `sudo ./start-virtuoso-goloso.sh` or `sudo ./start-virtuoso-goloso-largemem.sh`.
 
 ```
 #!/bin/bash
@@ -47,25 +51,19 @@ Virtuoso-goloso supports the following environmental viriables given with the '-
 ## Dataset-feeding docker containers
 ### Build a container
 You have to build dataset-feeding containers to ensure the dataset is up-to-date. This step does not download any datasets.
+Run `sudo ./containers/<FEEDING_CONTAINER>/build.sh`. The following is an example for building the bio-birtuoso-hpo container.
 
+```bash
+$ cd containers/bio-virtuoso-hpo
+$ sudo docker build -t misshie/bio-virtuoso-hpo .
 ```
-$ git clone git://github.com/misshie/bio-virtuoso.git
-$ cd bio-virtuoso/containers/bio-virtuoso-hpo
-$ sudo docker build -t misshie/bio-virtuso-hpo .
-```
-
-Try also `sudo ./containers/<FEEDING_CONTAINER>/build.sh`.
-
 ### Run a dataset-feeding container
-A commandline to run a dataset-feeding container:
-
-```
+Run `sudo ./containers/<FEEDING_CONTAINER>/feed.sh`. To feed bigger datasets, larger RAM and bigger, larger NumerOfBuffers, or larger MaxDirtyBuffers may be required. Duration to download datasets and convert to RDF may vary. Downloading and The following is a commandline to run the bio-virtuoso-hpo dataset-feeding container:
+```bash
 $ sudo docker run -it --link virtuoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
 ```
 
-Try also `sudo ./containers/<FEEDING_CONTAINER>/feed.sh`.
-
-These containers exits after uploading datasets to virtuoso-goloso. If you want to see downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and check files under `/opt/bio-virtuoso`.
+These containers exits after uploading datasets to virtuoso-goloso. If you want to check downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and seel files under `/opt/bio-virtuoso`.
 
 #### list of dataset feeding containers (misshie/bio-virtuoso-*)
 
@@ -84,16 +82,16 @@ These containers exits after uploading datasets to virtuoso-goloso. If you want 
 |omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl                          |Gendoo's ja_JP translation of OMIM entries. See also http://gendoo.dbcls.jp developped by Takeru Nakazato|
 |mp-jax                  |http://purl.obolibrary.org/obo/mp.owl                      |Mammalian Phenotype ontology (MP) of Jax    |
 
-## access virtuoso
-You can access Virtuoso at <http://localhost:8890/>. The SPARQL endpoint is at <http://localhost:8890/sparql>.
+## Access the SPARQL endpoint
+You can access Virtuoso at <http://localhost:8890/>. The SPARQL endpoint is at <http://localhost:8890/sparql>. You may need to open port 8890  to allow accessing the SPARQL endpoint from the Internet. For instance, you have to run `sudo ufw allow 8890/tcp` on Ubuntu 14.04 LTS.
 
-### Simple SPARQLs
-#### show graphs fed by dataset-feeding containers
+### Simple SPARQL sample
+#### Show graphs fed by dataset-feeding containers
 ```
 SELECT DISTINCT ?g WHERE {GRAPH ?g {?s ?p ?o}}
 ```
 
-### Accessing the SPARQL endpoint from command-line
+### Accessing the SPARQL endpoint from the command-line
 ```bash
 #!/bin/bash
 url="http://localhost:8890/sparql"
@@ -110,8 +108,8 @@ EOF
 eval curl --form "\"format="${format}"\"" --form "\"query="${query}"\"" ${url}
 ```
 
-## How to feed datasets
-Dataset feeding containers use the following way to feed RDF files to virtuoso-goloso
+### Inside data-feeding containerHow to feed datasets
+Dataset feeding containers use the following ways to feed RDF files to virtuoso-goloso
 
 For RDF/XML files:
 ```bash
@@ -125,6 +123,7 @@ curl \
      -F file=@${file} \
      ${url}
 ```
+
 For Turtle/N3 files:
 ```bash
 #!/bin/bash
@@ -150,7 +149,7 @@ curl \
 ```
 
 ## License
-**Copyright**: (c) 2015; MISHIMA, Hiroyuki
+**Copyright**: (c) 2015-2016; MISHIMA, Hiroyuki
 
 hmishima at nagasaki-u.ac.jp, twitter:@mishima_eng (en_US), @mishimahryk (ja_JP)
 
