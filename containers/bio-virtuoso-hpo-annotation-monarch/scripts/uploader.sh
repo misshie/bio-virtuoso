@@ -21,4 +21,3 @@ curl \
      -F file=@${file} \
      ${url}
 echo
-
