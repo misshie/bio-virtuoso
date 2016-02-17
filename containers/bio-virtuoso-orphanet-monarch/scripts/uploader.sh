@@ -12,8 +12,8 @@ curl \
 echo
 
 url="http://virtuoso-goloso:4567/turtle"
-graph="http://data.monarchinitiative.org/ttl/orphanet.ttl
-file="orphanets.ttl"
+graph="http://data.monarchinitiative.org/ttl/orphanet.ttl"
+file="orphanet.ttl"
 
 curl \
      -X POST \
@@ -21,4 +21,3 @@ curl \
      -F file=@${file} \
      ${url}
 echo
-
