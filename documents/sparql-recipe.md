@@ -1,6 +1,10 @@
-# SPARQL Samples
-## 1) Graph
-```SQL
+# SPARQL recipe for Bio-Virtuoso
+written by CHIYOKAWA, Masamichi, and MISHIMA, Hiroyuki
+
+## recipe 1) Show all graph URIs
+
+query:
+```SPARQL
 SELECT DISTINCT ?g
   WHERE {
     GRAPH ?g {
@@ -8,6 +12,8 @@ SELECT DISTINCT ?g
   }
 }
 ```
+
+results:
 ```
 g
 http://www.openlinksw.com/schemas/virtrdf#
@@ -25,8 +31,11 @@ http://data.monarchinitiative.org/ttl/omim_dataset.ttl
 http://data.monarchinitiative.org/ttl/orphanet_dataset.ttl
 http://data.monarchinitiative.org/ttl/orphanet.ttl
 ```
-## 2) First 5 triples in HPO
-```SQL
+
+## recipe 2) First 5 triples in HPO
+
+query:
+```SPARQL
 SELECT *
 WHERE {
   GRAPH <http://purl.obolibrary.org/obo/hp.owl> {
@@ -35,6 +44,7 @@ WHERE {
 }
 LIMIT 5
 ```
+resutls:
 ```
 s 	p 	o
 http://www.w3.org/2000/01/rdf-schema#label 	http://www.w3.org/1999/02/22-rdf-syntax-ns#type 	http://www.w3.org/2002/07/owl#AnnotationProperty
@@ -45,7 +55,7 @@ http://www.geneontology.org/formats/oboInOwl#date 	http://www.w3.org/1999/02/22-
 ```
 
 ## 3) Count number of triples in a graph
-```SQL
+```SPARQL
 SELECT COUNT(?s)
 WHERE {
   GRAPH <http://purl.obolibrary.org/obo/hp.owl> {
@@ -59,7 +69,7 @@ callret-0
 ```
 
 ## 4) Select all triples which have HP_0001903 (label=Anemia) as a subject.
-```SQL
+```SPARQL
 PREFIX hp: <http://purl.obolibrary.org/obo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -102,7 +112,7 @@ http://purl.obolibrary.org/obo/HP_0001903 	0 	http://www.w3.org/2002/07/owl#equi
 
 ## 5) Select all subjects which are subclasses of Anemia HP_0001903 
 
-```SQL
+```SPARQL
 PREFIX hp: <http://purl.obolibrary.org/obo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -166,7 +176,7 @@ http://purl.obolibrary.org/obo/HP_0011895 	Anemia due to reduced life span of re
 
 ## 6) Show syndromes which are related to sub classes of Anemia using ORPHANET gene information
 
-```SQL
+```SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 
@@ -213,7 +223,7 @@ Anemia 	http://www.orpha.net/ORDO/Orphanet_2785 	"some variant of CA2 that is a 
 # グラフ情報
 ## どのようなグラフがあるか？
 ### クエリ
-```SQL
+```SPARQL
 SELECT DISTINCT ?g
   WHERE {
     GRAPH ?g {
