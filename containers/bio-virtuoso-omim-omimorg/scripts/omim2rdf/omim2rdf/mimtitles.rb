@@ -18,11 +18,11 @@ module Omim2rdf
     end
 
     def puts_triple(fout, s, p, o)
-      fout.puts Triple.triple(s, p, o) unless o.empty?
+      fout.puts Turtle.triple(s, p, o) unless o.empty?
     end
   
     def puts_tripleq(fout, s, p, o, xsd="")
-      fout.puts Triple.tripleq(s, p, o, xsd) unless o.empty?
+      fout.puts Turtle.tripleq(s, p, o, xsd) unless o.empty?
     end
 
     def puts_property_definitions(fout)
@@ -50,31 +50,34 @@ module Omim2rdf
         end
         next if row.start_with?("#")
 
-        uuid = Triple.generate_uuid
-        mimtitles = RowMimTitles.new(row.split("\t"))
+        uuid = Turtle.generate_uuid
+        mimtitles = RowMimTitles.new(*row.split("\t"))
         puts_tripleq(fout, uuid, "omim:prefix",  mimtitles.prefix)
         puts_tripleq(fout, uuid, "omim:mim_number", mimtitles.mim_number)
-        mimtiles.preferred_titile).split(";; ").each do |o|
+        mimtitles.preferred_title.split(";; ").each do |o|
           puts_tripleq(fout, uuid, "omim:preferred_title", o)
         end
-        mimtitles.sybmol_alternative_title).split(";; ").each do |o|
-          puts_tripleq(fout, uuid, "omim:symbol_alternative_title", o)
+        if mimtitles.symbol_alternative_title
+          mimtitles.symbol_alternative_title.split(";; ").each do |o|
+            puts_tripleq(fout, uuid, "omim:symbol_alternative_title", o)
+          end
         end
-        mimtiles.included_title.split(";; ").each do |o|
-          puts_tripleq(fout, uuid, "omim:included_title", o)
-        end
-      end
-
-      def run(opts)
-        load_opts(opts)
-        open(path, 'r') do |fin|
-          outname = File.basename(path).asub(/\.txt\z/, '.ttl') 
-          open(outname, 'w') do |fout|
-            convert(fin: fin, fout: fout)
+        if mimtitles.included_title
+          mimtitles.included_title.split(";; ").each do |o|
+            puts_tripleq(fout, uuid, "omim:included_title", o)
           end
         end
       end
-      
+    end
+    
+    def run(opts)
+      load_opts(opts)
+      open(path, 'r') do |fin|
+        outname = File.basename(path).sub(/\.txt\z/, '.ttl') 
+        open(outname, 'w') do |fout|
+          convert(fin: fin, fout: fout)
+        end
+      end
     end
   
   end # class

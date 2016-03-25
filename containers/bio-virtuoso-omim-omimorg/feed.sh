@@ -1,12 +1,14 @@
 #!/bin/bash
-dldir="../../tmp/OMIM"
-echo run misshie/bio-virtuoso-omim-monarch
+
+# EDIT HERE TO INDICATE
+# A DIRECTORY CONTAINING FILES DOWNLOADED FROM OMIM.ORG
+# (use a full path)
+dldir="/peta/top/genetics/Mishima/Docker/bio-virtuoso/tmp/Omim"
+
+echo run misshie/bio-virtuoso-omim-omimorg
 docker run \
     -i -t \
     --link virtuoso-goloso:virtuoso-goloso \
-    -e Mim2Gene=${dldir}/mim2gene.txt \
-    -e MimTitles=${dldir}/mimTitles.txt \
-    -e GeneMap=${dldir}/genemap.txt \
-    -e MorbidMap=${dldir}/morbidmap.txt \
-    -e GeneMap2=${dldir}/genemap2.txt \
-    misshie/bio-virtuoso-omim-monarch
+    --volume=${dldir}:/opt/bio-virtuoso/omim-omimorg/downloads:ro \
+    misshie/bio-virtuoso-omim-omimorg $1
+

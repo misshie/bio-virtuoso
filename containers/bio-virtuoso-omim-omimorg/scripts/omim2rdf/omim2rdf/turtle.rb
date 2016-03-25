@@ -25,7 +25,7 @@ module Omim2rdf
       [s, p, o].join("\t") + ' .'
     end
 
-    def self.puts_tripleq(s, p, o, lang="")
+    def self.tripleq(s, p, o, lang="")
       unless [s, p, o].any?{|x| x.empty?}
         qo = '"' + o.gsub(/\A\"|\"\z/,'').gsub(/\"/, '\"') + '"'          
         self.triple(s, p, "#{qo}#{lang}")      

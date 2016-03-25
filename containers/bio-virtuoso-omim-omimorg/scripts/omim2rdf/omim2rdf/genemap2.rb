@@ -3,6 +3,7 @@ module Omim2rdf
   # Convert OMIM offifical tables  to Turtle files
   # require ruby >=2.1.0
   class GeneMap2
+    include Omim2rdf
     RowGeneMap2 =
       Struct.new(:chromosome,
                  :genomic_position_start, :genomic_position_end,
@@ -15,21 +16,21 @@ module Omim2rdf
                  :entrez_gene_id,
                  :ensembl_gene_id,
                  :comments,
-                 :phenotypes,
+                 :phenotype,
                  :mouse_gene_symbol_id)
 
     attr_reader :path
     def load_opts(opts)
-      raise "options --GeneMap is not given" unless opts["GeneMap"]
-      @path = opts["GeneMap"]
+      raise "options --GeneMap is not given" unless opts["GeneMap2"]
+      @path = opts["GeneMap2"]
     end
 
     def puts_triple(fout, s, p, o)
-      fout.puts Triple.triple(s, p, o) unless o.empty?
+      fout.puts Turtle.triple(s, p, o) if !(o.nil? || o.empty?)
     end
 
     def puts_tripleq(fout, s, p, o, xsd="")
-      fout.puts Triple.tripleq(s, p, o, xsd) unless o.empty?
+      fout.puts Turtle.tripleq(s, p, o, xsd) if !(o.nil? || o.empty?)
     end
 
     def puts_property_definitions(fout)
@@ -65,22 +66,24 @@ module Omim2rdf
         end
         next if row.start_with?("#")
 
-        uuid = Triple.generate_uuid
-        genemap2 = RowGeneMap2.new(row.split("\t"))
+        uuid = Turtle.generate_uuid
+        genemap2 = RowGeneMap2.new(*row.split("\t"))
         puts_tripleq(fout, uuid, "omim:chromosome", genemap2.chromosome)
         puts_tripleq(fout, uuid, "omim:genomic_position_start", genemap2.genomic_position_start)
         puts_tripleq(fout, uuid, "omim:genomic_position_end",   genemap2.genomic_position_end)
         puts_tripleq(fout, uuid, "omim:cyto_location",          genemap2.cyto_location)
         puts_tripleq(fout, uuid, "omim:computed_cyto_location", genemap2.computed_cyto_location)
         puts_tripleq(fout, uuid, "omim:mim_number",             genemap2.mim_number)
-        genemap2.mim_number.split(", ").each do |o|
-          puts_tripleq(fout, uuid, "omim:gene_symbol", o)
+        if genemap2.mim_number
+          genemap2.mim_number.split(", ").each do |o|
+            puts_tripleq(fout, uuid, "omim:gene_symbol", o)
+          end
         end
         puts_tripleq(fout, uuid, "omim:gene_name",              genemap2.gene_name)
         puts_tripleq(fout, uuid, "omim:approved_symbol",        genemap2.approved_symbol)
         puts_tripleq(fout, uuid, "omim:entrez_gene_id",         genemap2.entrez_gene_id)
-        puts_tripleq(fout, uuid, "omim:ensemble_gene_id",       genemap2.ensembl_gene_id)
-        puts_tripleq(fout, uuid, "omim:phenotype",              genemap2.ensembl_phenotype)
+        puts_tripleq(fout, uuid, "omim:ensembl_gene_id",       genemap2.ensembl_gene_id)
+        puts_tripleq(fout, uuid, "omim:phenotype",              genemap2.phenotype)
         puts_tripleq(fout, uuid, "omim:mouse_gene_symbol_id",   genemap2.mouse_gene_symbol_id)
       end
     end
@@ -88,7 +91,7 @@ module Omim2rdf
     def run(opts)
       load_opts(opts)
       open(path, 'r') do |fin|
-        outname = File.basename(path).asub(/\.txt\z/, '.ttl') 
+        outname = File.basename(path).sub(/\.txt\z/, '.ttl') 
         open(outname, 'w') do |fout|
           convert(fin: fin, fout: fout)
         end

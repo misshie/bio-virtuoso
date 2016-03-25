@@ -63,7 +63,7 @@ Run `sudo ./containers/<FEEDING_CONTAINER>/feed.sh`. To feed bigger datasets, la
 $ sudo docker run -it --link virtuoso-goloso:virtuoso-goloso misshie/bio-virtuoso-hpo
 ```
 
-These containers exits after uploading datasets to virtuoso-goloso. If you want to check downloaded dataset, try `sudo docker run -it misshie/bio-virtuoso-hpo /bin/bash` and seel files under `/opt/bio-virtuoso`.
+These containers exits after uploading datasets to virtuoso-goloso. If you want to check downloaded dataset, try `sudo ./feed.sh /bin/bash` and see files under `/opt/bio-virtuoso`.
 
 #### list of dataset feeding containers (misshie/bio-virtuoso-*)
 
@@ -81,6 +81,18 @@ These containers exits after uploading datasets to virtuoso-goloso. If you want 
 |go                      |http://purl.obolibrary.org/obo/go.owl                      |Gene Ontology (GO)                          |
 |omim-gendoo-ja          |http://misshie.jp/rdf/omim2ja.ttl                          |Gendoo's ja_JP translation of OMIM entries. See also http://gendoo.dbcls.jp/ developped by Takeru Nakazato|
 |mp-jax                  |http://purl.obolibrary.org/obo/mp.owl                      |Mammalian Phenotype ontology (MP) of Jax    |
+
+
+#### list of dataset feeding contaners using manually downloaded files
+These contaners are designed for non-redistributable or proprietary datasets. Edit `feed.sh` to indicate a directory containing downloaded files.
+
+|container               |graph URL|description|
+|:-----------------------|:----------------------------------------|:-------------------------------------------|
+|omim-omimorg            |http://misshie.jp/rdf/omim/mim2gene.ttl  |see http://omim.org/downloads |
+|                        |http://misshie.jp/rdf/omim/mimTitles.ttl | |
+|                        |http://misshie.jp/rdf/omim/genemap.ttl   | |
+|                        |http://misshie.jp/rdf/omim/morbidmap.ttl | |
+|                        |http://misshie.jp/rdf/omim/genemap2.ttl  | |
 
 ## Access the SPARQL endpoint
 You can access Virtuoso at <http://localhost:8890/>. The SPARQL endpoint is at <http://localhost:8890/sparql>. You may need to open port 8890  to allow accessing the SPARQL endpoint from the Internet. For instance, you have to run `sudo ufw allow 8890/tcp` on Ubuntu 14.04 LTS.

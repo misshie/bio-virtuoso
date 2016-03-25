@@ -13,7 +13,7 @@ docker run \
     -e MaxDirtyBuffers="3000000" \
     -e SQL_PREFETCH_ROWS="10000" \
     -e SQL_PREFETCH_BYTES="160000" \
-    misshie/virtuoso-goloso
+    misshie/virtuoso-goloso $1
 
 # 1) default is undefined
 #    MaxQueryCostEstimationTime

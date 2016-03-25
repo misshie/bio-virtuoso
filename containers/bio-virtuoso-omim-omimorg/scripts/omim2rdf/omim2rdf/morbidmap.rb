@@ -2,8 +2,8 @@ module Omim2rdf
 
   # Convert OMIM offifical tables  to Turtle files
   # require ruby >=2.1.0
-  class MorbitMap
-    MorbidMap =
+  class MorbidMap
+    RowMorbidMap =
       Struct.new(:phenotype,
                  :gene_symbol,
                  :mim_number,
@@ -16,11 +16,11 @@ module Omim2rdf
     end
 
     def puts_triple(fout, s, p, o)
-      fout.puts Triple.triple(s, p, o) unless o.empty?
+      fout.puts Turtle.triple(s, p, o) if !(o.nil? || o.empty?)
     end
 
     def puts_tripleq(fout, s, p, o, xsd="")
-      fout.puts Triple.tripleq(s, p, o, xsd) unless o.empty?
+      fout.puts Turtle.tripleq(s, p, o, xsd) if !(o.nil? || o.empty?)
     end
 
     def puts_property_definitions(fout)
@@ -46,11 +46,13 @@ module Omim2rdf
         end
         next if row.start_with?("#")
 
-        uuid = Triple.generate_uuid
-        morbidmap = RowMorbidMap.new(row.split("\t"))
+        uuid = Turtle.generate_uuid
+        morbidmap = RowMorbidMap.new(*row.split("\t"))
         puts_tripleq(fout, uuid, "omim:phenotype",     morbidmap.phenotype)
-        morbidmap.gene_symbol.split(", ").each do |o|
-          puts_tripleq(fout, uuid, "omim:gene_symbol", o)
+        if morbidmap.gene_symbol
+          morbidmap.gene_symbol.split(", ").each do |o|
+            puts_tripleq(fout, uuid, "omim:gene_symbol", o)
+          end
         end
         puts_tripleq(fout, uuid, "omim:mim_number",    "rdfs:label", "MIM number")
         puts_tripleq(fout, uuid, "omim:cyto_location", "rdfs:label", "cytogentic location")
@@ -60,7 +62,7 @@ module Omim2rdf
     def run(opts)
       load_opts(opts)
       open(path, 'r') do |fin|
-        outname = File.basename(path).asub(/\.txt\z/, '.ttl') 
+        outname = File.basename(path).sub(/\.txt\z/, '.ttl') 
         open(outname, 'w') do |fout|
           convert(fin: fin, fout: fout)
         end
