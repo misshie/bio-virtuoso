@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t misshie/bio-virtuoso-omim-monarch .
+docker build -t misshie/bio-virtuoso-omim-omimorg .
 
