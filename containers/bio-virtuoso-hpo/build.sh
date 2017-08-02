@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t misshie/bio-virtuoso-hpo .
+docker build --no-cache -t misshie/bio-virtuoso-hpo .

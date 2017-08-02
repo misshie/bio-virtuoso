@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t misshie/bio-virtuoso-go .
+docker build --no-cache -t misshie/bio-virtuoso-go .
 

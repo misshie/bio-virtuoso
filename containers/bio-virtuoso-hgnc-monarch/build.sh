@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t misshie/bio-hgnc-monarch .
+docker build --no-cache -t misshie/bio-hgnc-monarch .

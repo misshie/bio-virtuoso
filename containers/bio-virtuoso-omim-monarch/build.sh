@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t misshie/bio-virtuoso-omim-omimorg .
+docker build --no-cache -t misshie/bio-virtuoso-omim-omimorg .
 
